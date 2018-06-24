@@ -8,7 +8,7 @@
 model simulador
 
 global {
-	int num_consumer_network <- 100;
+	int num_consumer_network <- 1000;
 	list<int> actual_energy_consumed <-  [0,0,0,0,0,0,0,0,0,0,0,0];
 	list<int> energy_consumed <-[0,0,0,0,0,0,0,0,0,0,0,0];
 	
@@ -26,7 +26,7 @@ global {
 				result <- result + energy_consumed[k] + ";" + actual_energy_consumed[k] +";";
 		}
 		loop i over:species_consumer_generic {
-			result <- result  + i.name + ";" + (i.is_irregular ? "irregular" : "normal")  +  ((i.is_residential ? "residential" : "commercial") + " - " + i.category + ";");
+			result <- result  + i.name + ";" + (i.is_irregular ? "irregular;" : "normal;")  +  ((i.is_residential ? "residential" : "commercial") + " - " + i.category + ";");
 			loop k over:j {
 				result <- result + i.registered_individual_consumption[k] + ";" + i.current_individual_consumption[k] +";";
 			}
@@ -81,7 +81,7 @@ species species_consumer_generic {
 	}
 	aspect default {
 		color <-is_irregular ? color_irregular :  color_normal;
-		draw circle(3) color: color;
+		draw circle(1) color: color;
 		draw shape color: color_actual;
 	}
 }
