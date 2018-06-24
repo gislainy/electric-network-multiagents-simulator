@@ -1,0 +1,1 @@
+cycle: 0; actual_energy_consumed: 0.0; energy_consumed: 0.0

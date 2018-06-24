@@ -34,7 +34,7 @@ global {
 	reflex save_result when: (num_consumer_network_fineshed = num_consumer_network) {
 		save ("cycle: "+ cycle + "; actual_energy_consumed: " + actual_energy_consumed
 	   		+ "; energy_consumed: " + energy_consumed) 
-	   		to: "results_network_"+interactions+".txt" type: "text" ;
+	   		to: "results_network_"+cycle+".txt" type: "text" ;
 	}
 	reflex stop_simulation when: (num_consumer_network_fineshed = num_consumer_network) {
 		interactions <- interactions+1;

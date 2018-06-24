@@ -1,0 +1,1 @@
+cycle: 4; actual_energy_consumed: 30156.09169126831; energy_consumed: 316294.0
