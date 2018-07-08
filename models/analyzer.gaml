@@ -9,12 +9,12 @@ model analyzer
 
 /* Insert your model definition here */
 global {
-	file my_csv_file <- csv_file("result_for_analyzer.csv",",");
+	file my_csv_file <- csv_file("result_for_analyzer.csv",";");
 	
 	init {
 		//convert the file into a matrix
 		matrix data <- matrix(my_csv_file);
-		//loop on the matrix rows (skip the first header line)
+//		loop on the matrix rows (skip the first header line)
 		loop i from: 1 to: data.rows -1{
 			//loop on the matrix columns
 			loop j from: 0 to: data.columns -1{
@@ -22,11 +22,14 @@ global {
 			}	
 		}		
 	}
+	reflex when:(cycle=1) {
+		do pause;
+	}
 }
 
-experiment simulador type: gui {
+experiment analyzer type: gui {
 	output {
-		display main_display {
+		display analyzer {
 		}
 	}
 }

@@ -8,7 +8,7 @@
 model simulador
 
 global {
-	int num_consumer_network <- 1000;
+	int num_consumer_network <- 100;
 	list<int> actual_energy_consumed <-  [0,0,0,0,0,0,0,0,0,0,0,0,0];
 	list<int> energy_consumed <-[0,0,0,0,0,0,0,0,0,0,0,0,0];
 	
@@ -27,8 +27,8 @@ global {
 				result <- result + energy_consumed[k] + ";" + actual_energy_consumed[k] +";";
 		}
 		loop i over:species_consumer_generic {
-			result_for_analyzer <- result_for_analyzer  + i.consumer_unit + ";" + (i.is_irregular ? "irregular;" : "normal;")  +  ((i.is_residential ? "residential" : "commercial") + " - " + i.category + ";");
-			result <- result  + i.consumer_unit + ";" + (i.is_irregular ? "irregular;" : "normal;")  +  ((i.is_residential ? "residential" : "commercial") + " - " + i.category + ";");
+			result_for_analyzer <- result_for_analyzer  + i.consumer_unit + ";" + (i.is_irregular ? "irregular;" : "normal;")  +  ((i.is_residential ? "residential" : "commercial") + ";" + i.category + ";");
+			result <- result  + i.consumer_unit + ";" + (i.is_irregular ? "irregular;" : "normal;")  +  ((i.is_residential ? "residential" : "commercial") + ";" + i.category + ";");
 			loop k over:j {
 				result_for_analyzer <- result_for_analyzer + i.registered_individual_consumption[k] + ";";
 				result <- result + i.registered_individual_consumption[k] + ";" + i.current_individual_consumption[k] +";";
@@ -83,7 +83,7 @@ species species_consumer_generic {
 		current_individual_consumption[i+1] <- registered_individual_consumption[i+1];
 		if(is_irregular) {
 			current_individual_consumption[i+1] <- current_individual_consumption[i+1] + (current_individual_consumption[i+1]/2);
-			registered_individual_consumption[i+1] <- registered_individual_consumption[i+1]/ rnd(1,3);
+			registered_individual_consumption[i+1] <- registered_individual_consumption[i+1] - (registered_individual_consumption[i+1]/2);
 		}
 		actual_energy_consumed[i+1] <- actual_energy_consumed[i+1] + current_individual_consumption[i+1];
 		energy_consumed[i+1] <- energy_consumed[i+1] + registered_individual_consumption[i+1];
@@ -101,7 +101,7 @@ grid network width: num_consumer_network height:num_consumer_network neighbors: 
 }
 experiment simulador type: gui {
 	output {
-		display main_display {
+		display network {
 			grid network lines: #black ;
 			species species_consumer_generic aspect:default;
 		}
