@@ -8,7 +8,7 @@
 model simulador
 
 global {
-	int num_consumer_network <- 100;
+	int num_consumer_network <- 1000;
 	list<int> actual_energy_consumed <-  [0,0,0,0,0,0,0,0,0,0,0,0,0];
 	list<int> energy_consumed <-[0,0,0,0,0,0,0,0,0,0,0,0,0];
 	
