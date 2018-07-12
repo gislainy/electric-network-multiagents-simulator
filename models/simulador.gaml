@@ -83,7 +83,7 @@ species species_consumer_generic {
 		current_individual_consumption[i+1] <- registered_individual_consumption[i+1];
 		if(is_irregular) {
 			current_individual_consumption[i+1] <- current_individual_consumption[i+1] + (current_individual_consumption[i+1]/2);
-			registered_individual_consumption[i+1] <- registered_individual_consumption[i+1] - (registered_individual_consumption[i+1]/2);
+			//registered_individual_consumption[i+1] <- registered_individual_consumption[i+1] - (registered_individual_consumption[i+1]/2);
 		}
 		actual_energy_consumed[i+1] <- actual_energy_consumed[i+1] + current_individual_consumption[i+1];
 		energy_consumed[i+1] <- energy_consumed[i+1] + registered_individual_consumption[i+1];
